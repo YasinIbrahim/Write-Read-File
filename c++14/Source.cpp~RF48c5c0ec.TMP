@@ -1,0 +1,31 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+struct record {
+	std::string name;
+	int id;
+};
+
+int find_id(const std::vector<record> &people,
+	const std::string &name)
+{
+	std::string match_name = [&name](const record& r) -> bool {
+		return r.name == name;
+	};
+	int ii = find_if(people.begin(), people.end(), match_name);
+	if (ii == people.end())
+		return -1;
+	else
+		//return ii->id;
+		return -2;
+}
+
+int main()
+{
+	std::vector<record> roster = { { "mark", 1 },
+	{ "bill", 2 },
+	{ "ted", 3 } };
+	std::cout << find_id(roster, "bill") << "\n";
+	std::cout << find_id(roster, "ron") << "\n";
+}
